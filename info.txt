@@ -1,0 +1,21 @@
+As classes estão organizados em pacotes
+
+DAO: Acesso aos objetos
+SET GLOBAL time_zone = '+03:00';
+
+
+DTO: Transferência dos objetos
+VIEW: Inteface gráfica / formulários
+
+Classe - ConexaoDAO:
+Temos o método para realizar a conexão com o banco de dados, onde conectamos com a base de dados, no caso temos a "db_sistema".
+
+Tabelas em db_sistema:
+Clientes
+Usuarios
+
+
+Classe - ClienteDTO:
+Cadastrar: No cadastro, recolhe a informação do usuário, armazena na DTO e depois envia para o banco.
+
+Pesquisar/listar: Recolhe a informação do banco, armazena na DTO e depois recolhe da DTO e exibe para o usuário.
