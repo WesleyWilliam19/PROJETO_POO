@@ -36,6 +36,7 @@ public class frmClienteVIEW extends javax.swing.JFrame {
         txtId = new javax.swing.JTextField();
         btnLimparCampos = new javax.swing.JButton();
         btnAlterar = new javax.swing.JButton();
+        btnExcluir = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Cadastro de Clientes");
@@ -121,6 +122,14 @@ public class frmClienteVIEW extends javax.swing.JFrame {
         });
         getContentPane().add(btnAlterar, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 180, -1, -1));
 
+        btnExcluir.setText("EXCLUIR");
+        btnExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExcluirActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnExcluir, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 180, -1, -1));
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -128,7 +137,7 @@ public class frmClienteVIEW extends javax.swing.JFrame {
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
         CadastrarCliente();
         listarValoresCliente();
-        //LimparCampos();
+        LimparCampos();
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
     private void btnLimparCamposActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparCamposActionPerformed
@@ -146,6 +155,12 @@ public class frmClienteVIEW extends javax.swing.JFrame {
             CarregarCampos();
         }
     }//GEN-LAST:event_tabelaClienteMouseClicked
+
+    private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
+        ExcluirCliente();
+        listarValoresCliente();
+        LimparCampos();
+    }//GEN-LAST:event_btnExcluirActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -183,6 +198,7 @@ public class frmClienteVIEW extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAlterar;
     private javax.swing.JButton btnCadastrar;
+    private javax.swing.JButton btnExcluir;
     private javax.swing.JButton btnLimparCampos;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -260,7 +276,7 @@ public class frmClienteVIEW extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Preencha todos os campos obrigatórios.", "Erro de validação", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        
+
         // Verifica se o CPF contém apenas números
         if (!cpf.matches("\\d+")) {
             JOptionPane.showMessageDialog(this, "O campo CPF deve conter apenas números.", "Erro de validação", JOptionPane.ERROR_MESSAGE);
@@ -276,6 +292,14 @@ public class frmClienteVIEW extends javax.swing.JFrame {
         // Verifica se a renda contém apenas números
         if (!renda.matches("\\d+")) {
             JOptionPane.showMessageDialog(this, "O campo Renda deve conter apenas números.", "Erro de validação", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        int idadeCliente = Integer.parseInt(idade);
+
+        // Verifica se a idade é menor que 18 anos
+        if (idadeCliente < 18) {
+            JOptionPane.showMessageDialog(this, "A idade mínima para cadastro é 18 anos.", "Erro de validação", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
@@ -337,9 +361,18 @@ public class frmClienteVIEW extends javax.swing.JFrame {
             return;
         }
 
-        // Verifica se a idade contém apenas números
+        // Verifica se a renda contém apenas números
         if (!renda_cliente.matches("\\d+")) {
             JOptionPane.showMessageDialog(this, "O campo Renda deve conter apenas números.", "Erro de validação", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // Converte a idade para um valor numérico
+        int idade = Integer.parseInt(idade_cliente);
+
+        // Verifica se a idade é menor que 18 anos
+        if (idade < 18) {
+            JOptionPane.showMessageDialog(this, "A idade mínima para cadastro é 18 anos.", "Erro de validação", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
@@ -366,6 +399,32 @@ public class frmClienteVIEW extends javax.swing.JFrame {
 
         // Executa o método de cadastro passando o objeto ClienteDTO como parâmetro
         objclientedao.alterarCliente(objclientedto);
+    }
+
+    private void ExcluirCliente() {
+        String idText = txtId.getText();
+
+        // Verifica se o campo de ID está vazio, o que indica que nenhum cliente foi selecionado
+        if (idText.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Clique duas vezes no cliente.", "Erro na operação", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        int id_cliente = Integer.parseInt(idText); // Converte o ID do cliente de texto para um valor inteiro
+
+        // Confirmação para excluir o cliente
+        int option = JOptionPane.showConfirmDialog(this, "Tem certeza que deseja excluir este cliente?", "Confirmação", JOptionPane.YES_NO_OPTION);
+        if (option == JOptionPane.YES_OPTION) {
+            // Cria um objeto ClienteDTO e define o ID do cliente a ser excluído
+            ClienteDTO objclientedto = new ClienteDTO();
+            objclientedto.setId_cliente(id_cliente);
+
+            // Cria uma instância da classe ClienteDAO para acessar os métodos de exclusão
+            ClienteDAO objclientedao = new ClienteDAO();
+
+            // Chama o método de exclusão passando o objeto ClienteDTO como parâmetro
+            objclientedao.excluirCliente(objclientedto);
+        }
     }
 
 }

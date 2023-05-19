@@ -97,4 +97,24 @@ public class ClienteDAO {
             JOptionPane.showMessageDialog(null, "ClienteDAO Alterar:" + erro);
         }
     }
+
+    // Exclusão do cliente no banco de dados
+    public void excluirCliente(ClienteDTO objclientedto) {
+        String sql = "delete from cliente where id_cliente = ?";
+
+        conn = new ConexaoDAO().conectaBD();
+
+        try {
+
+            pstm = conn.prepareStatement(sql);
+            
+            pstm.setInt(1, objclientedto.getId_cliente()); // Define o valor do parâmetro ID do cliente para a consulta SQL de exclusão
+
+            pstm.execute();
+            pstm.close();
+
+        } catch (SQLException erro) {
+            JOptionPane.showMessageDialog(null, "ClienteDAO Excluir:" + erro);
+        }
+    }
 }
