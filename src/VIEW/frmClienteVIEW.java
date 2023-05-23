@@ -12,6 +12,7 @@ public class frmClienteVIEW extends javax.swing.JFrame {
     public frmClienteVIEW() {
         initComponents();
         listarValoresCliente();
+        btnAlterar.setEnabled(false);
     }
 
     @SuppressWarnings("unchecked")
@@ -37,6 +38,9 @@ public class frmClienteVIEW extends javax.swing.JFrame {
         btnLimparCampos = new javax.swing.JButton();
         btnAlterar = new javax.swing.JButton();
         btnExcluir = new javax.swing.JButton();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        btnSair = new javax.swing.JMenu();
+        jMenuItem2 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Cadastro de Clientes");
@@ -130,7 +134,22 @@ public class frmClienteVIEW extends javax.swing.JFrame {
         });
         getContentPane().add(btnExcluir, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 180, -1, -1));
 
+        btnSair.setText("Inicio");
+
+        jMenuItem2.setText("Voltar");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        btnSair.add(jMenuItem2);
+
+        jMenuBar1.add(btnSair);
+
+        setJMenuBar(jMenuBar1);
+
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     /* BOTÕES */
@@ -161,6 +180,11 @@ public class frmClienteVIEW extends javax.swing.JFrame {
         listarValoresCliente();
         LimparCampos();
     }//GEN-LAST:event_btnExcluirActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        this.dispose();
+        new frmPrincipalVIEW().setVisible(true);
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -200,12 +224,15 @@ public class frmClienteVIEW extends javax.swing.JFrame {
     private javax.swing.JButton btnCadastrar;
     private javax.swing.JButton btnExcluir;
     private javax.swing.JButton btnLimparCampos;
+    private javax.swing.JMenu btnSair;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTable tabelaCliente;
@@ -241,9 +268,11 @@ public class frmClienteVIEW extends javax.swing.JFrame {
                 });
 
             }
+            btnAlterar.setEnabled(false);
         } catch (Exception erro) {
             JOptionPane.showMessageDialog(null, "Listar Valores VIEW: " + erro);
         }
+        btnAlterar.setEnabled(false);
     }
 
     // Carrega os campos de texto com as informações do cliente selecionado na tabela, permitindo a visualização e edição dos dados
@@ -259,6 +288,7 @@ public class frmClienteVIEW extends javax.swing.JFrame {
 
         // Desabilita o botão de cadastrar para evitar a criação de um novo registro durante a alteração. Evita duplicidade de cadastro
         btnCadastrar.setEnabled(false);
+        btnAlterar.setEnabled(true);
     }
 
     // Cadastro de um novo cliente no banco de dados, utilizando as informações preenchidas nos campos de texto
@@ -303,6 +333,12 @@ public class frmClienteVIEW extends javax.swing.JFrame {
             return;
         }
 
+        // Verifica se o CPF digitado possui mais ou menos de 11 dígitos
+        if (cpf.length() != 11) {
+            JOptionPane.showMessageDialog(this, "O CPF deve ter no máximo 11 dígitos.", "Erro de validação", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
         // Cria um objeto ClienteDTO e atribui os dados fornecidos pelo usuário
         ClienteDTO objclientedto = new ClienteDTO();
         objclientedto.setNome_cliente(nome);
@@ -330,6 +366,7 @@ public class frmClienteVIEW extends javax.swing.JFrame {
 
         // Habilita o botão de cadastrar novamente
         btnCadastrar.setEnabled(true);
+        btnAlterar.setEnabled(false);
     }
 
     // Atualiza as informações do cliente com os novos dados fornecidos pelo usuário
@@ -369,6 +406,12 @@ public class frmClienteVIEW extends javax.swing.JFrame {
 
         // Converte a idade para um valor numérico
         int idade = Integer.parseInt(idade_cliente);
+
+        // Verifica se o CPF digitado possui mais ou menosde 11 dígitos
+        if (cpf_cliente.length() != 11) {
+            JOptionPane.showMessageDialog(this, "O CPF deve ter no máximo 11 dígitos.", "Erro de validação", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
 
         // Verifica se a idade é menor que 18 anos
         if (idade < 18) {
@@ -425,6 +468,7 @@ public class frmClienteVIEW extends javax.swing.JFrame {
             // Chama o método de exclusão passando o objeto ClienteDTO como parâmetro
             objclientedao.excluirCliente(objclientedto);
         }
+        btnAlterar.setEnabled(false);
     }
 
 }
