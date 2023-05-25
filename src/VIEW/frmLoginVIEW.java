@@ -33,67 +33,70 @@ public class frmLoginVIEW extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         btnEntrar = new javax.swing.JButton();
         txtSenhaUsuario = new javax.swing.JPasswordField();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(204, 255, 204));
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setText("Nome de Usuário");
+        jLabel1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabel1.setText("Usuario");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 100, -1, -1));
 
+        txtNomeUsuario.setBackground(new java.awt.Color(250, 248, 248));
+        txtNomeUsuario.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 192, 0)));
         txtNomeUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtNomeUsuarioActionPerformed(evt);
             }
         });
+        getContentPane().add(txtNomeUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 130, 160, -1));
 
-        jLabel2.setText("Senha de Usuário");
+        jLabel2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabel2.setText("Senha");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 180, -1, -1));
 
+        btnEntrar.setBackground(new java.awt.Color(0, 66, 66));
+        btnEntrar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnEntrar.setForeground(new java.awt.Color(255, 255, 255));
         btnEntrar.setText("Entrar");
         btnEntrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEntrarActionPerformed(evt);
             }
         });
+        getContentPane().add(btnEntrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 260, 80, 30));
 
+        txtSenhaUsuario.setBackground(new java.awt.Color(249, 247, 247));
+        txtSenhaUsuario.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 192, 0)));
         txtSenhaUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtSenhaUsuarioActionPerformed(evt);
             }
         });
+        getContentPane().add(txtSenhaUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 210, 160, -1));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(txtSenhaUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addGap(35, 35, 35)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnEntrar)
-                            .addComponent(jLabel1)
-                            .addComponent(txtNomeUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2))))
-                .addContainerGap(114, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(31, 31, 31)
-                .addComponent(jLabel1)
-                .addGap(18, 18, 18)
-                .addComponent(txtNomeUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel2)
-                .addGap(18, 18, 18)
-                .addComponent(txtSenhaUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(43, 43, 43)
-                .addComponent(btnEntrar)
-                .addContainerGap(73, Short.MAX_VALUE))
-        );
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/VIEW/Imagens/Sample_User_Icon30x30.png"))); // NOI18N
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 30, 30, 30));
+
+        jLabel4.setBackground(new java.awt.Color(51, 204, 0));
+        jLabel4.setForeground(new java.awt.Color(153, 255, 102));
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/VIEW/Imagens/Sem-Título--2.png"))); // NOI18N
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 210, 360));
+
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 26)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(0, 255, 153));
+        jLabel6.setText("LOGIN");
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 30, -1, -1));
+
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/VIEW/Imagens/fundoWhite.png"))); // NOI18N
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 0, 230, 360));
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtNomeUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNomeUsuarioActionPerformed
@@ -147,6 +150,10 @@ public class frmLoginVIEW extends javax.swing.JFrame {
     private javax.swing.JButton btnEntrar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JTextField txtNomeUsuario;
     private javax.swing.JPasswordField txtSenhaUsuario;
     // End of variables declaration//GEN-END:variables
@@ -175,7 +182,8 @@ public class frmLoginVIEW extends javax.swing.JFrame {
                 dispose();
             } else {
                 //enviar mensagem dizendo incorreto
-                JOptionPane.showConfirmDialog(null, "Usuário ou senha inválidos");
+                JOptionPane.showMessageDialog(null, "Usuário ou senha inválidos");
+               // JOptionPane.showConfirmDialog(null, "Usuário ou senha inválidos");
             }
         } catch (SQLException erro) {
             JOptionPane.showMessageDialog(null, "FRMLOGINVIEW" + erro);
