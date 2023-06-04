@@ -17,6 +17,7 @@ public class frmPrincipalVIEW extends javax.swing.JFrame {
         btnMenuCadastro = new javax.swing.JMenu();
         btnMenuCliente = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
+        btnMenuEmprestimo = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -36,6 +37,15 @@ public class frmPrincipalVIEW extends javax.swing.JFrame {
         jMenuBar1.add(btnMenuCadastro);
 
         jMenu2.setText("Empréstimo");
+
+        btnMenuEmprestimo.setText("Novo empréstimo");
+        btnMenuEmprestimo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMenuEmprestimoActionPerformed(evt);
+            }
+        });
+        jMenu2.add(btnMenuEmprestimo);
+
         jMenuBar1.add(jMenu2);
 
         setJMenuBar(jMenuBar1);
@@ -59,6 +69,11 @@ public class frmPrincipalVIEW extends javax.swing.JFrame {
         new frmClienteVIEW().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnMenuClienteActionPerformed
+
+    private void btnMenuEmprestimoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuEmprestimoActionPerformed
+        new frmEmprestimoVIEW().setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnMenuEmprestimoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -98,6 +113,7 @@ public class frmPrincipalVIEW extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu btnMenuCadastro;
     private javax.swing.JMenuItem btnMenuCliente;
+    private javax.swing.JMenuItem btnMenuEmprestimo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;

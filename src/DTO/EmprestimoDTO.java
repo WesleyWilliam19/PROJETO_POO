@@ -10,15 +10,6 @@ public class EmprestimoDTO {
     private LocalDateTime data_hora_emprestimo;
     private String protocolo;
 
-    /*
-    public EmprestimoDTO(int id_cliente, double valor_emprestimo, LocalDateTime data_hora_emprestimo, String protocolo) {
-        this.id_emprestimo = id_emprestimo;
-        this.id_cliente = id_cliente;
-        this.valor_emprestimo = valor_emprestimo;
-        this.data_hora_emprestimo = data_hora_emprestimo;
-        this.protocolo = protocolo;
-    }
-     */
     public int getId_emprestimo() {
         return id_emprestimo;
     }

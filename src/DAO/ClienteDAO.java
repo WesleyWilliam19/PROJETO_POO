@@ -107,7 +107,7 @@ public class ClienteDAO {
         try {
 
             pstm = conn.prepareStatement(sql);
-            
+
             pstm.setInt(1, objclientedto.getId_cliente()); // Define o valor do parâmetro ID do cliente para a consulta SQL de exclusão
 
             pstm.execute();

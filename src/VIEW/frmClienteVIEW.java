@@ -42,7 +42,7 @@ public class frmClienteVIEW extends javax.swing.JFrame {
         btnSair = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
         btnIrEmprestimo = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
+        btnNovoEmprestimo = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Cadastro de Clientes");
@@ -150,13 +150,13 @@ public class frmClienteVIEW extends javax.swing.JFrame {
 
         btnIrEmprestimo.setText("Emprestimo");
 
-        jMenuItem1.setText("Novo empréstimo");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        btnNovoEmprestimo.setText("Novo empréstimo");
+        btnNovoEmprestimo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+                btnNovoEmprestimoActionPerformed(evt);
             }
         });
-        btnIrEmprestimo.add(jMenuItem1);
+        btnIrEmprestimo.add(btnNovoEmprestimo);
 
         jMenuBar1.add(btnIrEmprestimo);
 
@@ -200,35 +200,12 @@ public class frmClienteVIEW extends javax.swing.JFrame {
         new frmPrincipalVIEW().setVisible(true);
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+    private void btnNovoEmprestimoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoEmprestimoActionPerformed
+        new frmEmprestimoVIEW().setVisible(true);
         this.dispose();
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+    }//GEN-LAST:event_btnNovoEmprestimoActionPerformed
 
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(frmClienteVIEW.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(frmClienteVIEW.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(frmClienteVIEW.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(frmClienteVIEW.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
@@ -243,6 +220,7 @@ public class frmClienteVIEW extends javax.swing.JFrame {
     private javax.swing.JButton btnExcluir;
     private javax.swing.JMenu btnIrEmprestimo;
     private javax.swing.JButton btnLimparCampos;
+    private javax.swing.JMenuItem btnNovoEmprestimo;
     private javax.swing.JMenu btnSair;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -251,7 +229,6 @@ public class frmClienteVIEW extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;

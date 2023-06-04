@@ -5,9 +5,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-//import java.time.LocalDateTime;
 import java.util.ArrayList;
-//import java.util.List;
 import javax.swing.JOptionPane;
 
 public class EmprestimoDAO {
@@ -17,9 +15,11 @@ public class EmprestimoDAO {
     ResultSet rs;
     //ArrayList<EmprestimoDTO> lista = new ArrayList<>();
 
+    // Realiza o cadastro (INSERT) de um emprestimo no banco de dados
     public void inserirEmprestimo(EmprestimoDTO emprestimo) {
-        String sql = "insert into emprestimo (id_cliente, valor_emprestimo, data_hora_emprestimo, protocolo) VALUES (?, ?, ?, ?)";
+        String sql = "insert into emprestimo (id_cliente, valor_emprestimo, data_hora_emprestimo, protocolo) values (?, ?, ?, ?)";
 
+        // Estabelece a conexão com o banco de dados
         conn = new ConexaoDAO().conectaBD();
 
         try {
@@ -29,25 +29,29 @@ public class EmprestimoDAO {
             pstm.setTimestamp(3, java.sql.Timestamp.valueOf(emprestimo.getData_hora_emprestimo()));
             pstm.setString(4, emprestimo.getProtocolo());
 
-            pstm.execute(); // Executa a consulta SQL
-            pstm.close(); // Fecha o PreparedStatement para liberar recursos
+            // Executa a inserção
+            pstm.execute();
+            pstm.close();
         } catch (SQLException erro) {
             JOptionPane.showMessageDialog(null, "EmprestimoDAO Inserir:" + erro);
         }
     }
 
+    // SQL para obter o ID do cliente pelo nome
     public int getIdCliente(String nomeCliente) {
-        String sql = "SELECT id_cliente FROM cliente WHERE nome_cliente = ?";
+        String sql = "select id_cliente from cliente where nome_cliente = ?";
 
+        // Realiza conexão
         conn = new ConexaoDAO().conectaBD();
 
-        try (PreparedStatement statement = conn.prepareStatement(sql)) {
-            statement.setString(1, nomeCliente);
+        try {
+            pstm = conn.prepareStatement(sql); // Prepara a consulta SQL
+            pstm.setString(1, nomeCliente);
+            rs = pstm.executeQuery();
 
-            ResultSet resultSet = statement.executeQuery();
-
-            if (resultSet.next()) {
-                return resultSet.getInt("id_cliente");
+            if (rs.next()) {
+                // Retorna o ID do cliente encontrado
+                return rs.getInt("id_cliente");
             } else {
                 return 0;
             }
@@ -57,6 +61,7 @@ public class EmprestimoDAO {
         }
     }
 
+    // Lista todos os empréstimos da tabela emprestimo
     public ArrayList<EmprestimoDTO> listarEmprestimos() {
         String sql = "SELECT * FROM emprestimo";
 
@@ -70,50 +75,84 @@ public class EmprestimoDAO {
 
             while (rs.next()) {
                 EmprestimoDTO objemprestimoDTO = new EmprestimoDTO();
+                // Definições
                 objemprestimoDTO.setId_emprestimo(rs.getInt("id_emprestimo"));
                 objemprestimoDTO.setId_cliente(rs.getInt("id_cliente"));
                 objemprestimoDTO.setValor_emprestimo(rs.getDouble("valor_emprestimo"));
                 objemprestimoDTO.setData_hora_emprestimo(rs.getTimestamp("data_hora_emprestimo").toLocalDateTime());
                 objemprestimoDTO.setProtocolo(rs.getString("protocolo"));
 
+                // Adiciona o objeto EmprestimoDTO à lista de empréstimos
                 lista.add(objemprestimoDTO);
             }
         } catch (SQLException erro) {
             JOptionPane.showMessageDialog(null, "EmprestimoDAO Listar: " + erro);
-        } finally {
-            try {
-                if (rs != null) {
-                    rs.close();
-                }
-                if (pstm != null) {
-                    pstm.close();
-                }
-            } catch (SQLException ex) {
-                JOptionPane.showMessageDialog(null, "Erro ao fechar conexão: " + ex);
-            }
         }
         return lista;
     }
 
-    public void excluirEmprestimo(EmprestimoDTO objemprestimodto) {
-        String sql = "DELETE FROM emprestimo WHERE protocolo = ?";
+    // SQL para excluir um empréstimo pelo ID
+    public void excluirEmprestimo(int idEmprestimo) {
+        String sql = "delete from emprestimo where id_emprestimo = ?";
 
         conn = new ConexaoDAO().conectaBD();
 
         try {
             pstm = conn.prepareStatement(sql);
-            pstm.setString(1, objemprestimodto.getProtocolo());
+            pstm.setInt(1, idEmprestimo);
             pstm.execute();
         } catch (SQLException erro) {
             JOptionPane.showMessageDialog(null, "EmprestimoDAO Excluir: " + erro);
-        } finally {
-            try {
-                if (pstm != null) {
-                    pstm.close();
-                }
-            } catch (SQLException erro) {
-                JOptionPane.showMessageDialog(null, "Erro ao fechar conexão: " + erro);
-            }
         }
     }
+
+    // SQL para buscar um empréstimo pelo protocolo
+    public EmprestimoDTO buscarEmprestimoPorProtocolo(String protocolo) {
+        String sql = "select * from emprestimo where protocolo = ?";
+
+        conn = new ConexaoDAO().conectaBD();
+
+        try {
+            pstm = conn.prepareStatement(sql);
+            pstm.setString(1, protocolo);
+            rs = pstm.executeQuery();
+
+            if (rs.next()) {
+                EmprestimoDTO emprestimoDTO = new EmprestimoDTO();
+                emprestimoDTO.setId_emprestimo(rs.getInt("id_emprestimo"));
+                emprestimoDTO.setId_cliente(rs.getInt("id_cliente"));
+                emprestimoDTO.setValor_emprestimo(rs.getDouble("valor_emprestimo"));
+                emprestimoDTO.setData_hora_emprestimo(rs.getTimestamp("data_hora_emprestimo").toLocalDateTime());
+                emprestimoDTO.setProtocolo(rs.getString("protocolo"));
+
+                // Retorna o empréstimo encontrado
+                return emprestimoDTO;
+            } else {
+                return null; // Retorna null se não encontrar o empréstimo com o protocolo especificado
+            }
+        } catch (SQLException erro) {
+            JOptionPane.showMessageDialog(null, "EmprestimoDAO buscarEmprestimoPorProtocolo: " + erro);
+            return null;
+        }
+    }
+
+    // SQL para atualizar o valor de um empréstimo pelo protocolo
+    public void atualizarEmprestimo(EmprestimoDTO emprestimo) {
+        String sql = "update emprestimo set valor_emprestimo = ? where protocolo = ?";
+
+        conn = new ConexaoDAO().conectaBD();
+
+        try {
+            pstm = conn.prepareStatement(sql);
+            pstm.setDouble(1, emprestimo.getValor_emprestimo());
+            pstm.setString(2, emprestimo.getProtocolo());
+
+            // Executa a atualização
+            pstm.executeUpdate();
+            pstm.close();
+        } catch (SQLException erro) {
+            JOptionPane.showMessageDialog(null, "EmprestimoDAO Atualizar:" + erro);
+        }
+    }
+
 }

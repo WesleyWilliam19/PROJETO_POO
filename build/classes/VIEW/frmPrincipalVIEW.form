@@ -23,6 +23,16 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Empr&#xe9;stimo"/>
           </Properties>
+          <SubComponents>
+            <MenuItem class="javax.swing.JMenuItem" name="btnMenuEmprestimo">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Novo empr&#xe9;stimo"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnMenuEmprestimoActionPerformed"/>
+              </Events>
+            </MenuItem>
+          </SubComponents>
         </Menu>
       </SubComponents>
     </Menu>
