@@ -106,7 +106,7 @@ public class ClienteDAO {
 
         try {
 
-            pstm = conn.prepareStatement(sql);
+            pstm = conn.prepareStatement(sql); // Prepara a consulta SQL
 
             pstm.setInt(1, objclientedto.getId_cliente()); // Define o valor do parâmetro ID do cliente para a consulta SQL de exclusão
 
@@ -117,4 +117,53 @@ public class ClienteDAO {
             JOptionPane.showMessageDialog(null, "ClienteDAO Excluir:" + erro);
         }
     }
+
+    // SQL para obter um cliente pelo ID
+    public ClienteDTO obterClientePorId(int idCliente) {
+        String sql = "select * from cliente where id_cliente = ?";
+
+        conn = new ConexaoDAO().conectaBD(); // Conecta ao banco de dados
+
+        try {
+            pstm = conn.prepareStatement(sql); // Prepara a consulta SQL
+            pstm.setInt(1, idCliente); // Define o ID do cliente na consulta
+            rs = pstm.executeQuery(); // Executa a consulta e obtém o resultado
+
+            if (rs.next()) { // Se houver um resultado na consulta
+                ClienteDTO cliente = new ClienteDTO(); // Cria um novo objeto ClienteDTO
+                cliente.setId_cliente(rs.getInt("id_cliente")); // Define o ID do cliente no objeto clienteDTO
+                cliente.setNome_cliente(rs.getString("nome_cliente")); // Define o nome do cliente no objeto clienteDTO
+                cliente.setRenda_cliente(rs.getString("renda_cliente")); // Define a renda do cliente no objeto clienteDTO
+
+                return cliente; // Retorna o objeto clienteDTO com as informações do cliente encontrado
+            } else {
+                return null; // Retorna null se nenhum cliente for encontrado
+            }
+        } catch (SQLException erro) {
+            JOptionPane.showMessageDialog(null, "ClienteDAO obterClientePorId: " + erro);
+            return null; // Retorna null em caso de erro
+        }
+    }
+
+    public boolean verificarCPFExistente(String cpf) {
+        String sql = "SELECT COUNT(*) FROM cliente WHERE cpf_cliente = ?";
+        conn = new ConexaoDAO().conectaBD();
+
+        try {
+            pstm = conn.prepareStatement(sql);
+            pstm.setString(1, cpf);
+            rs = pstm.executeQuery();
+
+            if (rs.next()) {
+                int count = rs.getInt(1);
+                return count > 0; // Retorna true se houver algum registro com o CPF informado
+            } else {
+                return false; // Caso ocorra algum erro na consulta ou não haja registros, retorna false
+            }
+        } catch (SQLException erro) {
+            JOptionPane.showMessageDialog(null, "ClienteDAO verificarCPFExistente: " + erro);
+            return false;
+        }
+    }
+
 }

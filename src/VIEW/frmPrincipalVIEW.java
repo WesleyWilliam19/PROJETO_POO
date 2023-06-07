@@ -20,6 +20,7 @@ public class frmPrincipalVIEW extends javax.swing.JFrame {
         btnMenuEmprestimo = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("SYSLOANS");
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/VIEW/Imagens/Sem-Título-1 - Copia.png"))); // NOI18N

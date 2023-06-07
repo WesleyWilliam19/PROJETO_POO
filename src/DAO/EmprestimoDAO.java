@@ -155,4 +155,25 @@ public class EmprestimoDAO {
         }
     }
 
+    public double getRendaCliente(int idCliente) {
+        String sql = "select renda_cliente from cliente where id_cliente = ?";
+        conn = new ConexaoDAO().conectaBD();
+
+        try {
+            pstm = conn.prepareStatement(sql);
+            pstm.setInt(1, idCliente);
+            rs = pstm.executeQuery();
+
+            if (rs.next()) {
+                // Retorna a renda do cliente encontrado
+                return rs.getDouble("renda_cliente");
+            } else {
+                return 0.0; // Retorna 0.0 se não encontrar o cliente com o ID especificado
+            }
+        } catch (SQLException erro) {
+            JOptionPane.showMessageDialog(null, "EmprestimoDAO getRendaCliente: " + erro);
+            return 0.0;
+        }
+    }
+
 }

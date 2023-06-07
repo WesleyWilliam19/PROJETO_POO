@@ -42,6 +42,7 @@ public class frmEmprestimoVIEW extends javax.swing.JFrame {
         btnInicio = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("EMPRÉSTIMOS");
 
         lblNomeCliente.setText("ID do Cliente");
 
@@ -187,26 +188,28 @@ public class frmEmprestimoVIEW extends javax.swing.JFrame {
         int linhaSelecionada = tblEmprestimos.getSelectedRow();
 
         if (linhaSelecionada >= 0) {
+            // Obtém o protocolo do empréstimo da linha selecionada na tabela
             String protocolo = tblEmprestimos.getValueAt(linhaSelecionada, 1).toString();
             String valorBaixaStr = JOptionPane.showInputDialog(this, "Informe o valor da baixa:");
 
             if (valorBaixaStr != null && !valorBaixaStr.isEmpty()) {
-                double valorBaixa = Double.parseDouble(valorBaixaStr);
+                double valorBaixa = Double.parseDouble(valorBaixaStr);  // Converte o valor da baixa para double
 
-                EmprestimoDTO emprestimoDTO = emprestimoDAO.buscarEmprestimoPorProtocolo(protocolo);
+                EmprestimoDTO emprestimoDTO = emprestimoDAO.buscarEmprestimoPorProtocolo(protocolo);  // Busca o empréstimo pelo protocolo informado
 
                 if (emprestimoDTO != null) {
-                    double valorRestante = emprestimoDTO.getValor_emprestimo() - valorBaixa;
+                    double valorRestante = emprestimoDTO.getValor_emprestimo() - valorBaixa; // Calcula o valor restante do empréstimo após a baixa
 
                     if (valorRestante >= 0) {
+                        // Atualiza o valor do empréstimo com o valor restante (Update)
                         emprestimoDTO.setValor_emprestimo(valorRestante);
                         emprestimoDAO.atualizarEmprestimo(emprestimoDTO);
 
-                        JOptionPane.showMessageDialog(this, "Baixa realizada com sucesso!");
+                        JOptionPane.showMessageDialog(this, "Baixa realizada com sucesso!", "SUCESSO", JOptionPane.INFORMATION_MESSAGE);
 
                         carregarDadosTabela();
                     } else {
-                        JOptionPane.showMessageDialog(this, "O valor da baixa é maior que o valor do empréstimo.");
+                        JOptionPane.showMessageDialog(this, "O valor da baixa é maior que o valor do empréstimo.", "ERRO!", JOptionPane.ERROR_MESSAGE);
                     }
                 }
             }
@@ -284,8 +287,8 @@ public class frmEmprestimoVIEW extends javax.swing.JFrame {
     }
 
     private void registrarEmprestimo() {
-        String idClienteStr = txtIdCliente.getText(); //  Obtém o texto digitado no campo txtIdCliente e armazena na variável idClienteStr
-        String valorEmprestimoStr = txtValorEmprestimo.getText(); // Obtém o texto digitado no campo txtValorEmprestimo e armazena na variável valorEmprestimoStr
+        String idClienteStr = txtIdCliente.getText();
+        String valorEmprestimoStr = txtValorEmprestimo.getText();
 
         // Verifica se os campos não estão vazios
         if (!idClienteStr.isEmpty() && !valorEmprestimoStr.isEmpty()) {
@@ -299,30 +302,60 @@ public class frmEmprestimoVIEW extends javax.swing.JFrame {
 
             double valorEmprestimo = Double.parseDouble(valorEmprestimoStr); // Converte o valor do empréstimo para double
 
-            LocalDateTime dataHoraEmprestimo = LocalDateTime.now(); // Obtém a data e hora atuais
-            String protocolo = dataHoraEmprestimo.format(DateTimeFormatter.ofPattern("ddMMyyyyHHmm")) + idCliente; // Gera o protocolo do empréstimo (data hora id)
+            // Obter informações do cliente pelo ID
+            ClienteDAO clienteDAO = new ClienteDAO();  // Instancia a classe ClienteDAO
+            ClienteDTO cliente = clienteDAO.obterClientePorId(idCliente);
 
-            EmprestimoDTO emprestimoDTO = new EmprestimoDTO(); // Cria um novo objeto EmprestimoDTO
-            emprestimoDTO.setId_cliente(idCliente); // Define o id do cliente no objeto emprestimoDTO
-            emprestimoDTO.setValor_emprestimo(valorEmprestimo); // Define o valor do empréstimo no objeto emprestimoDTO
-            emprestimoDTO.setData_hora_emprestimo(dataHoraEmprestimo); // Define a data e hora do empréstimo no objeto emprestimoDTO
-            emprestimoDTO.setProtocolo(protocolo); // Define o protocolo do empréstimo no objeto emprestimoDTO
+            // Define o valor mínimo de emprestimo para 1000 reais
+            if (valorEmprestimo < 1000) {
+                JOptionPane.showMessageDialog(this, "O valor do empréstimo não pode ser inferior a R$1.000,00 (mil reais).");
+                return;
+            }
 
-            emprestimoDAO.inserirEmprestimo(emprestimoDTO); // Insere o empréstimo na base de dados
+            // verifica se o cliente existe
+            if (cliente != null) {
+                double renda = Double.parseDouble(cliente.getRenda_cliente()); //converte a string para double
 
-            JOptionPane.showMessageDialog(this, "Empréstimo registrado com sucesso!");
+                // Realiza o emprestimo somente se a renda do cliente for maior ou igual a 1300 (aprox 1 salario mínimo)
+                if (renda >= 1300) {
+                    // Se o valor do empréstimo digitado for maior que 3x a renda, o emprestimo não é autorizado.
+                    if (valorEmprestimo > (3 * renda)) {
+                        JOptionPane.showMessageDialog(this, "O valor do empréstimo excede o limite permitido.", "Empréstimo recusado!", JOptionPane.ERROR_MESSAGE);
+                        return;
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(this, "Este cliente não possui uma renda compatível com o valor desejado.", "Empréstimo recusado!", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
 
-            limparCampos();
-            carregarDadosTabela();
+                LocalDateTime dataHoraEmprestimo = LocalDateTime.now();
+                String protocolo = dataHoraEmprestimo.format(DateTimeFormatter.ofPattern("ddMMyyyyHHmm")) + idCliente;
+
+                EmprestimoDTO emprestimoDTO = new EmprestimoDTO(); // Cria um novo objeto EmprestimoDTO
+                emprestimoDTO.setId_cliente(idCliente); // Define o id do cliente no objeto emprestimoDTO
+                emprestimoDTO.setValor_emprestimo(valorEmprestimo); // Define o valor do empréstimo no objeto emprestimoDTO
+                emprestimoDTO.setData_hora_emprestimo(dataHoraEmprestimo); // Define a data e hora do empréstimo no objeto emprestimoDTO
+                emprestimoDTO.setProtocolo(protocolo); // Define o protocolo do empréstimo no objeto emprestimoDTO
+
+                EmprestimoDAO emprestimoDAO = new EmprestimoDAO();  // Instancia a classe EmprestimoDAO
+                emprestimoDAO.inserirEmprestimo(emprestimoDTO); // Insere o empréstimo na base de dados
+
+                JOptionPane.showMessageDialog(this, "Empréstimo aprovado com sucesso!", "SUCESSO", JOptionPane.INFORMATION_MESSAGE);
+
+                limparCampos();
+                carregarDadosTabela();
+            } else {
+                JOptionPane.showMessageDialog(this, "Cliente não encontrado!", "ERRO!", JOptionPane.ERROR_MESSAGE);
+            }
         } else {
-            JOptionPane.showMessageDialog(this, "Preencha todos os campos!");
+            JOptionPane.showMessageDialog(this, "Preencha todos os campos!", "ERRO!", JOptionPane.ERROR_MESSAGE);
         }
     }
 
     private void excluirEmprestimo() {
         int linhaSelecionada = tblEmprestimos.getSelectedRow();
 
-        if (linhaSelecionada >= 0) { 
+        if (linhaSelecionada >= 0) {
             int confirmacao = JOptionPane.showConfirmDialog(this, "Deseja excluir o empréstimo selecionado?");
 
             if (confirmacao == JOptionPane.YES_OPTION) { // Exibe uma caixa de diálogo de confirmação para a exclusão
@@ -336,13 +369,13 @@ public class frmEmprestimoVIEW extends javax.swing.JFrame {
                 if (emprestimoDTO != null) {
                     emprestimoDAO.excluirEmprestimo(emprestimoDTO.getId_emprestimo()); // Remove o empréstimo da base de dados
                     model.removeRow(linhaSelecionada); // Remove a linha da tabela
-                    JOptionPane.showMessageDialog(this, "Empréstimo excluído com sucesso!");
+                    JOptionPane.showMessageDialog(this, "Empréstimo excluído com sucesso!", "SUCESSO", JOptionPane.INFORMATION_MESSAGE);
                 } else {
-                    JOptionPane.showMessageDialog(this, "Não foi possível encontrar o empréstimo selecionado!");
+                    JOptionPane.showMessageDialog(this, "Não foi possível encontrar o empréstimo selecionado!", "ERRO!", JOptionPane.ERROR_MESSAGE);
                 }
             }
         } else {
-            JOptionPane.showMessageDialog(this, "Selecione um empréstimo para excluir!");
+            JOptionPane.showMessageDialog(this, "Selecione um empréstimo para excluir!", "ATENÇÃO", JOptionPane.ERROR_MESSAGE);
         }
     }
 

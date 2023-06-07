@@ -3,7 +3,6 @@ package VIEW;
 import DAO.ClienteDAO;
 import DTO.ClienteDTO;
 import java.util.ArrayList;
-//import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -47,27 +46,16 @@ public class frmClienteVIEW extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Cadastro de Clientes");
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setText("Nome");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 40, -1, -1));
-        getContentPane().add(txtNome, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 60, 235, -1));
 
         jLabel2.setText("Endereço");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 100, -1, -1));
-        getContentPane().add(txtEndereco, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 120, 330, -1));
 
         jLabel3.setText("CPF");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 40, -1, -1));
-        getContentPane().add(txtCpf, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 60, 120, -1));
 
         jLabel4.setText("Idade");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 40, -1, -1));
-        getContentPane().add(txtIdade, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 60, 30, -1));
 
         jLabel5.setText("Renda");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, -1, -1));
-        getContentPane().add(txtRenda, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 120, 70, -1));
 
         btnCadastrar.setText("CADASTRAR");
         btnCadastrar.addActionListener(new java.awt.event.ActionListener() {
@@ -75,7 +63,6 @@ public class frmClienteVIEW extends javax.swing.JFrame {
                 btnCadastrarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnCadastrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 180, 110, -1));
 
         tabelaCliente.setForeground(new java.awt.Color(0, 204, 255));
         tabelaCliente.setModel(new javax.swing.table.DefaultTableModel(
@@ -102,15 +89,10 @@ public class frmClienteVIEW extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tabelaCliente);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(31, 244, 540, 316));
-        getContentPane().add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(31, 213, 540, 13));
-
         jLabel6.setText("ID");
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 40, -1, -1));
 
         txtId.setBackground(new java.awt.Color(242, 242, 242));
         txtId.setEnabled(false);
-        getContentPane().add(txtId, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, 70, -1));
 
         btnLimparCampos.setText("LIMPAR");
         btnLimparCampos.addActionListener(new java.awt.event.ActionListener() {
@@ -118,7 +100,6 @@ public class frmClienteVIEW extends javax.swing.JFrame {
                 btnLimparCamposActionPerformed(evt);
             }
         });
-        getContentPane().add(btnLimparCampos, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 120, -1, -1));
 
         btnAlterar.setText("SALVAR");
         btnAlterar.addActionListener(new java.awt.event.ActionListener() {
@@ -126,7 +107,6 @@ public class frmClienteVIEW extends javax.swing.JFrame {
                 btnAlterarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnAlterar, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 180, -1, -1));
 
         btnExcluir.setText("EXCLUIR");
         btnExcluir.addActionListener(new java.awt.event.ActionListener() {
@@ -134,7 +114,6 @@ public class frmClienteVIEW extends javax.swing.JFrame {
                 btnExcluirActionPerformed(evt);
             }
         });
-        getContentPane().add(btnExcluir, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 180, -1, -1));
 
         btnSair.setText("Inicio");
 
@@ -161,6 +140,92 @@ public class frmClienteVIEW extends javax.swing.JFrame {
         jMenuBar1.add(btnIrEmprestimo);
 
         setJMenuBar(jMenuBar1);
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(30, 30, 30)
+                        .addComponent(jLabel6)
+                        .addGap(79, 79, 79)
+                        .addComponent(jLabel1)
+                        .addGap(227, 227, 227)
+                        .addComponent(jLabel3)
+                        .addGap(129, 129, 129)
+                        .addComponent(jLabel4))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(30, 30, 30)
+                        .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(20, 20, 20)
+                        .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(25, 25, 25)
+                        .addComponent(txtCpf, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(30, 30, 30)
+                        .addComponent(txtIdade, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(30, 30, 30)
+                        .addComponent(jLabel5)
+                        .addGap(57, 57, 57)
+                        .addComponent(jLabel2))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(30, 30, 30)
+                        .addComponent(txtRenda, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(20, 20, 20)
+                        .addComponent(txtEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(40, 40, 40)
+                        .addComponent(btnLimparCampos))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(30, 30, 30)
+                        .addComponent(btnCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(20, 20, 20)
+                        .addComponent(btnAlterar)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnExcluir))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(31, 31, 31)
+                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 540, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(31, 31, 31)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 540, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(30, Short.MAX_VALUE))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(40, 40, 40)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel4))
+                .addGap(4, 4, 4)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtCpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtIdade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel2))
+                .addGap(4, 4, 4)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtRenda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnLimparCampos))
+                .addGap(37, 37, 37)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnCadastrar)
+                    .addComponent(btnAlterar)
+                    .addComponent(btnExcluir))
+                .addGap(10, 10, 10)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 316, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
 
         pack();
         setLocationRelativeTo(null);
@@ -288,6 +353,21 @@ public class frmClienteVIEW extends javax.swing.JFrame {
         btnAlterar.setEnabled(true);
     }
 
+    // Limpa as caixas de texto e deixa vazio
+    private void LimparCampos() {
+        txtId.setText("");
+        txtNome.setText("");
+        txtCpf.setText("");
+        txtIdade.setText("");
+        txtRenda.setText("");
+        txtEndereco.setText("");
+        txtNome.requestFocus();
+
+        // Habilita o botão de cadastrar novamente
+        btnCadastrar.setEnabled(true);
+        btnAlterar.setEnabled(false);
+    }
+
     // Cadastro de um novo cliente no banco de dados, utilizando as informações preenchidas nos campos de texto
     private void CadastrarCliente() {
         String nome, cpf, idade, endereco, renda;
@@ -307,6 +387,12 @@ public class frmClienteVIEW extends javax.swing.JFrame {
         // Verifica se o CPF contém apenas números
         if (!cpf.matches("\\d+")) {
             JOptionPane.showMessageDialog(this, "O campo CPF deve conter apenas números.", "Erro de validação", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // Verifica se o NOME contém apenas letras
+        if (nome.matches("\\d+")) {
+            JOptionPane.showMessageDialog(this, "O campo nome deve conter apenas letras.", "Erro de validação", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
@@ -332,7 +418,16 @@ public class frmClienteVIEW extends javax.swing.JFrame {
 
         // Verifica se o CPF digitado possui mais ou menos de 11 dígitos
         if (cpf.length() != 11) {
-            JOptionPane.showMessageDialog(this, "O CPF deve ter no máximo 11 dígitos.", "Erro de validação", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "O CPF deve conter 11 dígitos para validar.", "Erro de validação", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // Cria uma instância da classe ClienteDAO para acessar os métodos de cadastro
+        ClienteDAO objclientedao = new ClienteDAO();
+
+        // Verifica se o CPF já está cadastrado no banco de dados
+        if (objclientedao.verificarCPFExistente(cpf)) {
+            JOptionPane.showMessageDialog(this, "Já existe um cliente cadastrado com este CPF!.", "Erro de validação", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
@@ -344,26 +439,8 @@ public class frmClienteVIEW extends javax.swing.JFrame {
         objclientedto.setEndereco_cliente(endereco);
         objclientedto.setRenda_cliente(renda);
 
-        // Cria uma instância da classe ClienteDAO para acessar os métodos de cadastro
-        ClienteDAO objclientedao = new ClienteDAO();
-
         // Executa o método de cadastro passando o objeto ClienteDTO como parâmetro
         objclientedao.cadastrarCliente(objclientedto);
-    }
-
-    // Limpa as caixas de texto e deixa vazio
-    private void LimparCampos() {
-        txtId.setText("");
-        txtNome.setText("");
-        txtCpf.setText("");
-        txtIdade.setText("");
-        txtRenda.setText("");
-        txtEndereco.setText("");
-        txtNome.requestFocus();
-
-        // Habilita o botão de cadastrar novamente
-        btnCadastrar.setEnabled(true);
-        btnAlterar.setEnabled(false);
     }
 
     // Atualiza as informações do cliente com os novos dados fornecidos pelo usuário
@@ -389,6 +466,12 @@ public class frmClienteVIEW extends javax.swing.JFrame {
             return;
         }
 
+        // Verifica se o NOME contém apenas letras
+        if (nome_cliente.matches("\\d+")) {
+            JOptionPane.showMessageDialog(this, "O campo nome deve conter apenas letras.", "Erro de validação", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
         // Verifica se a idade contém apenas números
         if (!idade_cliente.matches("\\d+")) {
             JOptionPane.showMessageDialog(this, "O campo Idade deve conter apenas números.", "Erro de validação", JOptionPane.ERROR_MESSAGE);
@@ -406,13 +489,22 @@ public class frmClienteVIEW extends javax.swing.JFrame {
 
         // Verifica se o CPF digitado possui mais ou menosde 11 dígitos
         if (cpf_cliente.length() != 11) {
-            JOptionPane.showMessageDialog(this, "O CPF deve ter no máximo 11 dígitos.", "Erro de validação", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "O CPF deve conter 11 dígitos para validar.", "Erro de validação", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
         // Verifica se a idade é menor que 18 anos
         if (idade < 18) {
             JOptionPane.showMessageDialog(this, "A idade mínima para cadastro é 18 anos.", "Erro de validação", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // Cria uma instância da classe ClienteDAO para acessar os métodos de cadastro
+        ClienteDAO objclientedao = new ClienteDAO();
+
+        // Verifica se o CPF já está cadastrado no banco de dados
+        if (objclientedao.verificarCPFExistente(cpf_cliente)) {
+            JOptionPane.showMessageDialog(this, "Já existe um cliente cadastrado com este CPF!.", "Erro de validação", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
@@ -433,9 +525,6 @@ public class frmClienteVIEW extends javax.swing.JFrame {
         objclientedto.setIdade_cliente(idade_cliente);
         objclientedto.setRenda_cliente(renda_cliente);
         objclientedto.setEndereco_cliente(endereco_cliente);
-
-        // Cria uma instância da classe ClienteDAO para acessar os métodos de cadastro
-        ClienteDAO objclientedao = new ClienteDAO();
 
         // Executa o método de cadastro passando o objeto ClienteDTO como parâmetro
         objclientedao.alterarCliente(objclientedto);

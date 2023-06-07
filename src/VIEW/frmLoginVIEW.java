@@ -39,6 +39,7 @@ public class frmLoginVIEW extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("SYSLOANS - SISTEMA DE EMPRÉSTIMOS");
         setBackground(new java.awt.Color(204, 255, 204));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
