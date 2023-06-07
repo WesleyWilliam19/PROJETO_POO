@@ -1,11 +1,12 @@
-
 package VIEW;
 
+import java.awt.Toolkit;
 
 public class frmPrincipalVIEW extends javax.swing.JFrame {
 
     public frmPrincipalVIEW() {
         initComponents();
+        setIcon();
     }
 
     @SuppressWarnings("unchecked")
@@ -110,7 +111,6 @@ public class frmPrincipalVIEW extends javax.swing.JFrame {
             }
         });
     }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu btnMenuCadastro;
     private javax.swing.JMenuItem btnMenuCliente;
@@ -119,4 +119,8 @@ public class frmPrincipalVIEW extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     // End of variables declaration//GEN-END:variables
+
+    public void setIcon() {
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/VIEW/Imagens/logo.png")));
+    }
 }

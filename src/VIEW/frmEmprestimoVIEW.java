@@ -4,6 +4,7 @@ import DAO.ClienteDAO;
 import DAO.EmprestimoDAO;
 import DTO.ClienteDTO;
 import DTO.EmprestimoDTO;
+import java.awt.Toolkit;
 
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -13,11 +14,12 @@ import java.util.List;
 
 public class frmEmprestimoVIEW extends javax.swing.JFrame {
 
-    private ClienteDAO clienteDAO;
-    private EmprestimoDAO emprestimoDAO;
+    private final ClienteDAO clienteDAO;
+    private final EmprestimoDAO emprestimoDAO;
 
     public frmEmprestimoVIEW() {
         initComponents();
+        setIcon();
         clienteDAO = new ClienteDAO(); // Instancia o ClienteDAO para manipulação dos dados dos clientes
         emprestimoDAO = new EmprestimoDAO(); // Instancia o EmprestimoDAO para manipulação dos dados dos empréstimos
         carregarDadosTabela();
@@ -37,28 +39,34 @@ public class frmEmprestimoVIEW extends javax.swing.JFrame {
         jSeparator1 = new javax.swing.JSeparator();
         btnExcluir = new javax.swing.JButton();
         btnDarBaixa = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         btnSair = new javax.swing.JMenu();
         btnInicio = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("EMPRÉSTIMOS");
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lblNomeCliente.setText("ID do Cliente");
+        getContentPane().add(lblNomeCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, -1, -1));
 
         lblValorEmprestimo.setText("Valor do Emprestimo");
+        getContentPane().add(lblValorEmprestimo, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 30, -1, -1));
 
         txtIdCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtIdClienteActionPerformed(evt);
             }
         });
+        getContentPane().add(txtIdCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, 110, -1));
 
         txtValorEmprestimo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtValorEmprestimoActionPerformed(evt);
             }
         });
+        getContentPane().add(txtValorEmprestimo, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 50, 110, -1));
 
         btnRegistrarEmprestimo.setText("Confirmar");
         btnRegistrarEmprestimo.addActionListener(new java.awt.event.ActionListener() {
@@ -66,6 +74,7 @@ public class frmEmprestimoVIEW extends javax.swing.JFrame {
                 btnRegistrarEmprestimoActionPerformed(evt);
             }
         });
+        getContentPane().add(btnRegistrarEmprestimo, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, -1, -1));
 
         tblEmprestimos.setAutoCreateRowSorter(true);
         tblEmprestimos.setForeground(new java.awt.Color(0, 204, 255));
@@ -90,12 +99,16 @@ public class frmEmprestimoVIEW extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(tblEmprestimos);
 
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, 431, 348));
+        getContentPane().add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 124, 431, 10));
+
         btnExcluir.setText("Excluir");
         btnExcluir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnExcluirActionPerformed(evt);
             }
         });
+        getContentPane().add(btnExcluir, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 90, -1, -1));
 
         btnDarBaixa.setText("Baixa do título");
         btnDarBaixa.addActionListener(new java.awt.event.ActionListener() {
@@ -103,6 +116,10 @@ public class frmEmprestimoVIEW extends javax.swing.JFrame {
                 btnDarBaixaActionPerformed(evt);
             }
         });
+        getContentPane().add(btnDarBaixa, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 90, -1, -1));
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/VIEW/Imagens/logo.png"))); // NOI18N
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 10, 120, 110));
 
         btnSair.setText("Sair");
 
@@ -117,52 +134,6 @@ public class frmEmprestimoVIEW extends javax.swing.JFrame {
         jMenuBar1.add(btnSair);
 
         setJMenuBar(jMenuBar1);
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblNomeCliente)
-                        .addGap(82, 82, 82)
-                        .addComponent(lblValorEmprestimo))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(txtIdCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(40, 40, 40)
-                        .addComponent(txtValorEmprestimo, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnRegistrarEmprestimo)
-                        .addGap(26, 26, 26)
-                        .addComponent(btnExcluir)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnDarBaixa))
-                    .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 431, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 431, javax.swing.GroupLayout.PREFERRED_SIZE)))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(30, 30, 30)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblNomeCliente)
-                    .addComponent(lblValorEmprestimo))
-                .addGap(4, 4, 4)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtIdCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtValorEmprestimo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnRegistrarEmprestimo)
-                    .addComponent(btnExcluir)
-                    .addComponent(btnDarBaixa))
-                .addGap(11, 11, 11)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(6, 6, 6)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 348, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
 
         pack();
         setLocationRelativeTo(null);
@@ -236,6 +207,7 @@ public class frmEmprestimoVIEW extends javax.swing.JFrame {
     private javax.swing.JMenuItem btnInicio;
     private javax.swing.JButton btnRegistrarEmprestimo;
     private javax.swing.JMenu btnSair;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
@@ -356,7 +328,7 @@ public class frmEmprestimoVIEW extends javax.swing.JFrame {
         int linhaSelecionada = tblEmprestimos.getSelectedRow();
 
         if (linhaSelecionada >= 0) {
-            int confirmacao = JOptionPane.showConfirmDialog(this, "Deseja excluir o empréstimo selecionado?");
+            int confirmacao = JOptionPane.showConfirmDialog(this, "Deseja excluir o empréstimo selecionado?", "CONFIRMAÇÃO", JOptionPane.YES_NO_OPTION);
 
             if (confirmacao == JOptionPane.YES_OPTION) { // Exibe uma caixa de diálogo de confirmação para a exclusão
                 DefaultTableModel model = (DefaultTableModel) tblEmprestimos.getModel();
@@ -379,4 +351,7 @@ public class frmEmprestimoVIEW extends javax.swing.JFrame {
         }
     }
 
+    public void setIcon() {
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/VIEW/Imagens/logo.png")));
+    }
 }

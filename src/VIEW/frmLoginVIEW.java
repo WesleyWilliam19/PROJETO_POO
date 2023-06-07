@@ -5,6 +5,7 @@ import DTO.UsuarioDTO;
 import java.sql.SQLException;
 import java.sql.ResultSet;
 import javax.swing.JOptionPane;
+import java.awt.Toolkit;
 
 /**
  *
@@ -17,6 +18,7 @@ public class frmLoginVIEW extends javax.swing.JFrame {
      */
     public frmLoginVIEW() {
         initComponents();
+        setIcon();
     }
 
     /**
@@ -184,7 +186,7 @@ public class frmLoginVIEW extends javax.swing.JFrame {
             } else {
                 //enviar mensagem dizendo incorreto
                 JOptionPane.showMessageDialog(null, "Usuário ou senha inválidos");
-               // JOptionPane.showConfirmDialog(null, "Usuário ou senha inválidos");
+                // JOptionPane.showConfirmDialog(null, "Usuário ou senha inválidos");
             }
         } catch (SQLException erro) {
             JOptionPane.showMessageDialog(null, "FRMLOGINVIEW" + erro);
@@ -195,5 +197,9 @@ public class frmLoginVIEW extends javax.swing.JFrame {
         objusuariodto.setNome_usuario(txtNomeUsuario.getText());
         objusuariodto.setSenha_usuario(txtSenhaUsuario.getText());
          */
+    }
+
+    public void setIcon() {
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/VIEW/Imagens/logo.png")));
     }
 }

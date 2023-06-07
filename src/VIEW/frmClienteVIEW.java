@@ -2,6 +2,7 @@ package VIEW;
 
 import DAO.ClienteDAO;
 import DTO.ClienteDTO;
+import java.awt.Toolkit;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -10,6 +11,7 @@ public class frmClienteVIEW extends javax.swing.JFrame {
 
     public frmClienteVIEW() {
         initComponents();
+        setIcon();
         listarValoresCliente();
         btnAlterar.setEnabled(false);
     }
@@ -224,7 +226,8 @@ public class frmClienteVIEW extends javax.swing.JFrame {
                 .addGap(10, 10, 10)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 316, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 316, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(23, Short.MAX_VALUE))
         );
 
         pack();
@@ -557,4 +560,7 @@ public class frmClienteVIEW extends javax.swing.JFrame {
         btnAlterar.setEnabled(false);
     }
 
+    public void setIcon() {
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/VIEW/Imagens/logo.png")));
+    }
 }
